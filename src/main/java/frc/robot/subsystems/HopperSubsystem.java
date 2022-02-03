@@ -5,22 +5,28 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class HopperSubsystem extends SubsystemBase {
-  private TalonFX motor;
-  private DigitalInput breakbeam;
+  private TalonSRX motor;
+  private DigitalInput breakbeam1;
+  private DigitalInput breakbeam2;
 
   public HopperSubsystem() {
-    motor = new TalonFX(0);
-    breakbeam = new DigitalInput(7);
+    motor = new TalonSRX(0);
+    breakbeam1 = new DigitalInput(7);
+    breakbeam2 = new DigitalInput(8);    
   }
 
-  public boolean getBreakbeam(){
-    return breakbeam.get();
+  public boolean getBreakbeam1(){
+    return breakbeam1.get();
+  }
+
+  public boolean getBreakbeam2(){
+    return breakbeam2.get();
   }
 
   public void setMotorSpeed(double speed){

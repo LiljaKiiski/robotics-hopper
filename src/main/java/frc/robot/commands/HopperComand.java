@@ -5,20 +5,61 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.HopperSubsystem;
 
 public class HopperComand extends CommandBase {
-  public HopperComand() {
-    //addRequirements(requirements);
+  public HopperSubsystem hopper;
+
+  //Ball is leaving the hopper
+  private boolean leaving;
+
+  //Ball is inside the hopper
+  private boolean ballInside;
+
+  public HopperComand(HopperSubsystem hopper) {
+    this.hopper = hopper;
+    ballInside = false;
+    leaving = false;
+
+    addRequirements();
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   @Override
-  public void execute() {}
+  public void execute() {
+    //Ball entering in
+    if (hopper.getBreakbeam1()){
+      ballInside = true;
+    
+    //Ball leaving hopper
+    } if (hopper.getBreakbeam2()){
+      leaving = true;
+
+    //Ball is not leaving hopper or has left hopper
+    } if (!hopper.getBreakbeam2()){
+      leaving = false;
+      ballInside = false;
+    }
+
+    //Run motor if ball is entering or leaving
+    if (ballInside){
+      hopper.setMotorSpeed(Constants.MOTOR_SPEED);
+
+    //Otherwise no need to run motor
+    } else {
+      hopper.stopMotor();
+    }
+  }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+  }
 
   @Override
   public boolean isFinished() {
