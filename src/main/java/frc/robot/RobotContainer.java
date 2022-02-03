@@ -4,17 +4,21 @@
 
 package frc.robot;
 
+import frc.robot.commands.HopperComand;
 import frc.robot.subsystems.HopperSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
-  private final HopperSubsystem subsystem = new HopperSubsystem();
+  private final HopperSubsystem hopper = new HopperSubsystem();
 
   public RobotContainer() {
     configureButtonBindings();
+    new HopperComand(hopper);
   }
 
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+
+  }
 
   public Command getAutonomousCommand() {
     return null;

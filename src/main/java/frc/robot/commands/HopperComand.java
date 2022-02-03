@@ -42,12 +42,16 @@ public class HopperComand extends CommandBase {
 
     //Ball is not leaving hopper or has left hopper
     } if (!hopper.getBreakbeam2()){
-      leaving = false;
-      ballInside = false;
+
+      //Ball has left hopper
+      if (leaving){
+        ballInside = false;
+        leaving = false;
+      }
     }
 
     //Run motor if ball is entering or leaving
-    if (ballInside){
+    if (ballInside || leaving){
       hopper.setMotorSpeed(Constants.MOTOR_SPEED);
 
     //Otherwise no need to run motor
