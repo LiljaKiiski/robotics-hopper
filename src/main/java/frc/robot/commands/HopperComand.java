@@ -37,7 +37,7 @@ public class HopperComand extends CommandBase {
 
     if (ballInside){ //run motor
       hopper.setMotorSpeed(Constants.MOTOR_SPEED);
-      
+
     } else { //stop motor
       hopper.stopMotor();
     }
