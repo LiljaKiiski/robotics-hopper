@@ -35,10 +35,12 @@ public class HopperComand extends CommandBase {
       ballInside = false;
     }
 
-    if (ballInside){ //run motor
+    //Run motor
+    if (ballInside){
       hopper.setMotorSpeed(Constants.MOTOR_SPEED);
 
-    } else { //stop motor
+      //Stop motor
+    } else { 
       hopper.stopMotor();
     }
 
