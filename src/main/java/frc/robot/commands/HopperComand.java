@@ -25,19 +25,20 @@ public class HopperComand extends CommandBase {
 
   @Override
   public void execute() {
-    //Ball entering in
-    if (hopper.getBreakbeam1()){
+    //Ball entering in - previously unbroken, now broken
+    if (hopper.beam1PreviousState && !hopper.getBreakbeam1()){
       ballInside = true;
     }
 
-    //Ball has left - previous state true, now false
-    if (hopper.beam2PreviousState && !hopper.getBreakbeam2()){
+    //Ball has left - previously broken, now unbroken
+    if (!hopper.beam2PreviousState && hopper.getBreakbeam2()){
       ballInside = false;
     }
 
-    if (ballInside){
+    if (ballInside){ //run motor
       hopper.setMotorSpeed(Constants.MOTOR_SPEED);
-    } else {
+      
+    } else { //stop motor
       hopper.stopMotor();
     }
 

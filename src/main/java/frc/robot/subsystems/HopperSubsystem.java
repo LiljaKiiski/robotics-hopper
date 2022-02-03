@@ -34,10 +34,12 @@ public class HopperSubsystem extends SubsystemBase {
     Ultrasonic.setAutomaticMode(true);
   }
 
+  //true = unbroken, false=broken
   public boolean getBreakbeam1(){
     return breakbeam1.get();
   }
 
+  //true = unbroken, false=broken
   public boolean getBreakbeam2(){
     return breakbeam2.get();
   }
