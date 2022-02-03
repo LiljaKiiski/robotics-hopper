@@ -10,23 +10,17 @@ import frc.robot.subsystems.HopperSubsystem;
 
 public class HopperComand extends CommandBase {
   public HopperSubsystem hopper;
-  //Ball is leaving the hopper
-  private boolean leaving;
-
-  //Ball is inside the hopper
   private boolean ballInside;
 
   public HopperComand(HopperSubsystem hopper) {
     this.hopper = hopper;
     ballInside = false;
-    leaving = false;
-
+  
     addRequirements();
   }
 
   @Override
   public void initialize() {
-
   }
 
   @Override
@@ -34,30 +28,22 @@ public class HopperComand extends CommandBase {
     //Ball entering in
     if (hopper.getBreakbeam1()){
       ballInside = true;
-      hopper.
-
-    //Ball leaving hopper
-    } if (hopper.getBreakbeam2()){
-      leaving = true;
-
-    //Ball is not leaving hopper or has left hopper
-    } if (!hopper.getBreakbeam2()){
-
-      //Ball has left hopper
-      if (leaving){
-        ballInside = false;
-        leaving = false;
-      }
     }
 
-    //Run motor if ball is entering or leaving
-    if (ballInside || leaving){
-      hopper.setMotorSpeed(Constants.MOTOR_SPEED);
+    //Ball has left - previous state true, now false
+    if (hopper.beam2PreviousState && !hopper.getBreakbeam2()){
+      ballInside = false;
+    }
 
-    //Otherwise no need to run motor
+    if (ballInside){
+      hopper.setMotorSpeed(Constants.MOTOR_SPEED);
     } else {
       hopper.stopMotor();
     }
+
+    //Update states
+    hopper.beam1PreviousState = hopper.getBreakbeam1();
+    hopper.beam2PreviousState = hopper.getBreakbeam2();
   }
 
   @Override
