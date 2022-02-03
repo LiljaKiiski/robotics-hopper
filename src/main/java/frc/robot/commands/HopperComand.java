@@ -10,7 +10,6 @@ import frc.robot.subsystems.HopperSubsystem;
 
 public class HopperComand extends CommandBase {
   public HopperSubsystem hopper;
-
   //Ball is leaving the hopper
   private boolean leaving;
 
@@ -35,7 +34,8 @@ public class HopperComand extends CommandBase {
     //Ball entering in
     if (hopper.getBreakbeam1()){
       ballInside = true;
-    
+      hopper.
+
     //Ball leaving hopper
     } if (hopper.getBreakbeam2()){
       leaving = true;
